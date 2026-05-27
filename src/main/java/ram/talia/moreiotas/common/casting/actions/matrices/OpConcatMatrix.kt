@@ -5,13 +5,11 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
 import org.ejml.simple.SimpleMatrix
-import org.jblas.DoubleMatrix
 import ram.talia.moreiotas.MoreIotasConfig
 import ram.talia.moreiotas.api.asActionResult
 import ram.talia.moreiotas.api.asMatrix
 import ram.talia.moreiotas.api.getNumOrVecOrMatrix
 import ram.talia.moreiotas.api.matrixWrongSize
-import ram.talia.moreiotas.api.mod.MoreIotasConfig
 
 class OpConcatMatrix(private val concatVertically: Boolean) : ConstMediaAction {
     override val argc = 2
@@ -22,7 +20,7 @@ class OpConcatMatrix(private val concatVertically: Boolean) : ConstMediaAction {
 
         if (concatVertically) {
             if (mat0.numCols != mat1.numCols)
-                throw MishapInvalidIota.matrixWrongSize(args[1], 0, null, mat0.columns)
+                throw MishapInvalidIota.matrixWrongSize(args[1], 0, null, mat0.numCols)
             if (mat0.numRows + mat1.numRows > MoreIotasConfig.maxMatrixSize.get())
                 throw MishapInvalidIota.of(args[1],
                         0,
@@ -43,8 +41,7 @@ class OpConcatMatrix(private val concatVertically: Boolean) : ConstMediaAction {
         }
 
         return if (concatVertically)
-            SimpleMatrix
-            .concatVertically(mat0, mat1).asActionResult
-        else DoubleMatrix.concatHorizontally(mat0, mat1).asActionResult
+            mat0.concatRows(mat1).asActionResult
+        else mat0.concatColumns(mat1).asActionResult
     }
 }

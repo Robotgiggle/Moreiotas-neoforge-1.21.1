@@ -4,7 +4,6 @@ import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota
-import org.jblas.Solve
 import ram.talia.moreiotas.api.*
 
 object OpInverseMatrix : ConstMediaAction {
@@ -12,9 +11,9 @@ object OpInverseMatrix : ConstMediaAction {
 
     override fun execute(args: List<Iota>, env: CastingEnvironment): List<Iota> {
         val mat = args.getNumOrVecOrMatrix(0, argc).asMatrix
-        if (mat.rows != mat.columns)
-            throw MishapInvalidIota.matrixWrongSize(args[0], 0, mat.rows, mat.rows)
+        if (mat.numRows != mat.numCols)
+            throw MishapInvalidIota.matrixWrongSize(args[0], 0, mat.numRows, mat.numRows)
         // pseudo-inverse, will see how it works.
-        return Solve.pinv(mat).asActionResult
+        return mat.invert().asActionResult;
     }
 }
