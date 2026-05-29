@@ -22,7 +22,7 @@ object OpDeterminantMatrix : ConstMediaAction {
         if (mat.numCols != mat.numRows)
             throw MishapInvalidIota.ofType(args[0], 0, "matrix.square")
         if (mat.numCols > 4)
-            throw MishapInvalidIota.of(args[0], 0, "matrix.max_size", 4, 4, mat.columns, mat.rows)
+            throw MishapInvalidIota.of(args[0], 0, "matrix.max_size", 4, 4, mat.numCols, mat.numRows)
 
         return determinant(mat).asActionResult
     }

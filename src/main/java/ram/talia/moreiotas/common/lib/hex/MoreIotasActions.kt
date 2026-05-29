@@ -13,11 +13,11 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.InteractionHand
 import ram.talia.moreiotas.MoreIotasNeoforge.id;
 import ram.talia.moreiotas.api.casting.iota.StringIota
-/*import ram.talia.moreiotas.common.casting.actions.items.OpGetHeldItem
+import ram.talia.moreiotas.common.casting.actions.items.OpGetHeldItem
 import ram.talia.moreiotas.common.casting.actions.items.OpGetInventoryContents
 import ram.talia.moreiotas.common.casting.actions.matrices.*
 import ram.talia.moreiotas.common.casting.actions.strings.*
-import ram.talia.moreiotas.common.casting.actions.types.*/
+import ram.talia.moreiotas.common.casting.actions.types.*
 import java.util.function.BiConsumer
 
 object MoreIotasActions {
@@ -69,7 +69,7 @@ object MoreIotasActions {
 	val STRING_NEWLINE = make("string/newline",
 			fromAngles("waawaw", EAST),
 			Action.makeConstantOp(StringIota.makeUnchecked("\n")))
-	/*@JvmField
+	@JvmField
 	val STRING_BLOCK_GET = make("string/block/get", fromAngles("awqwawqe", EAST), OpGetBlockString)
 	@JvmField
 	val STRING_BLOCK_SET = make("string/block/set", fromAngles("dwewdweq", WEST), OpSetBlockString)
@@ -175,5 +175,4 @@ object MoreIotasActions {
 	val ITEM_GET_INVENTORY_ITEMS = make("item/inventory/items", fromAngles("dewqa", NORTH_EAST), OpGetInventoryContents(returnStacks = false))
 	@JvmField
 	val ITEM_MAKE = make("item/make", OperationAction(fromAngles("adeeedew", EAST)))
-*/
 }
